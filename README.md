@@ -24,21 +24,8 @@ New in 0.8.0 (Android Only):
 - Local development workflow using [Cordova CLI](http://cordova.apache.org/docs/en/edge/)
 
 ```bash
-cordova plugin add cordova-plugin-datepicker
+cordova plugin add https://github.com/svmxbrian/cordova-plugin-datepicker.git
 ```
-
-- Local development workflow using [PhoneGap CLI](http://phonegap.com/install/)
-
-```bash
-phonegap local plugin add cordova-plugin-datepicker
-```
-
-- Cloud-based development workflow using [PhoneGap Build](http://build.phonegap.com)
-
-```bash
-<gap:plugin name="cordova-plugin-datepicker" source="npm" />
-```
-
 
 ## Usage
 
@@ -229,6 +216,13 @@ Force locale for datePicker.
 Type: String
 
 Default: `en_us`
+
+### title - iOS
+Title for popup in iPad
+
+Type: String
+
+Default: ``
 
 ## Requirements
 - Cordova 3.0+
