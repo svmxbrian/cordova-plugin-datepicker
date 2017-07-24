@@ -39,15 +39,15 @@
   if (isIPhone) {
     [self showForPhone: options];
   } else {
-   [self showForPad: options];
- }
+    [self showForPad: options];
+  }
 }
 
 - (BOOL)showForPhone:(NSMutableDictionary *)options {
   if(!self.datePickerContainer){
     [[NSBundle mainBundle] loadNibNamed:@"DatePicker" owner:self options:nil];
   } else {
-      self.datePickerContainer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    self.datePickerContainer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
   }
 
   [self updateDatePicker:options];
@@ -89,19 +89,19 @@
                         delay:0
                       options:UIViewAnimationOptionCurveEaseOut
                    animations:^{
-    self.datePickerComponentsContainer.frame = frame;
-    self.datePickerContainer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+                     self.datePickerComponentsContainer.frame = frame;
+                     self.datePickerContainer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
 
-  } completion:^(BOOL finished) {
+                   } completion:^(BOOL finished) {
 
-  }];
+                   }];
 
   return true;
 }
 
 - (BOOL)showForPad:(NSMutableDictionary *)options {
-    self.datePickerPopover = [self createPopover:options];
-    return true;
+  self.datePickerPopover = [self createPopover:options];
+  return true;
 }
 
 - (void)hide {
@@ -121,10 +121,10 @@
                        [self.datePickerContainer removeFromSuperview];
                      }];
 
- } else {
-   //[self.datePickerPopover dismissViewControllerAnimated:NO completion:nil];
-   [self.datePickerPopover dismissPopoverAnimated:YES];
- }
+  } else {
+    //[self.datePickerPopover dismissViewControllerAnimated:NO completion:nil];
+    [self.datePickerPopover dismissPopoverAnimated:YES];
+  }
 }
 
 #pragma mark - Actions
@@ -179,24 +179,25 @@
   CGFloat pickerViewHeight = 216.0f;
   CGFloat buttonWidth = 70.0f;
   CGFloat buttonHeight = 35.0f;
-  CGFloat pickerTopOffset = 25.0f;
+  CGFloat pickerTopOffset = buttonHeight + 5.0f;
   CGFloat buttonFontSize = 16.0f;
+  CGFloat toolbarHeight = 44.0f;
 
   NSString *title = [options objectForKey:@"title"];
 
-  UIView *datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, pickerTopOffset, pickerViewWidth, pickerViewHeight)];
+  UIView *datePickerView = [[UIView alloc] initWithFrame:CGRectMake(0, pickerTopOffset, pickerViewWidth, pickerViewHeight + toolbarHeight)];
 
 
   CGRect frame = CGRectMake(0, pickerTopOffset, 0, 0);
   // in iOS8, UIDatePicker couldn't be shared in multi UIViews, it will cause crash. so   create new UIDatePicker instance every time
   if (! self.datePicker || [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
-      self.datePicker = [self createDatePicker:options frame:frame];
-      [self.datePicker addTarget:self action:@selector(dateChangedAction:) forControlEvents:UIControlEventValueChanged];
+    self.datePicker = [self createDatePicker:options frame:frame];
+    [self.datePicker addTarget:self action:@selector(dateChangedAction:) forControlEvents:UIControlEventValueChanged];
   }
   [self updateDatePicker:options];
 
   // Initialize the toolbar with Cancel and Done buttons and title
-  UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, pickerViewWidth, 44)];
+  UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, pickerViewWidth, toolbarHeight)];
   toolbar.barStyle = (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) ? UIBarStyleDefault : UIBarStyleBlackTranslucent;
   NSMutableArray *buttons =[[NSMutableArray alloc] init];
 
@@ -226,46 +227,46 @@
   [datePickerView addSubview:toolbar];
 
   /*
-  //CANCEL BUTTON SETUP
-  UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
-  cancel = [[UIButton alloc] init];
-  cancel.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
-  cancel.titleLabel.font = [UIFont systemFontOfSize:buttonFontSize];
-  [cancel setTitle:@"Cancel" forState:UIControlStateNormal];
-  [cancel setBackgroundColor:[UIColor clearColor]];
-  [cancel setTitleColor:[datePickerView tintColor] forState:UIControlStateNormal];
+   //CANCEL BUTTON SETUP
+   UIButton *cancel = [UIButton buttonWithType:UIButtonTypeCustom];
+   cancel = [[UIButton alloc] init];
+   cancel.frame = CGRectMake(0, 0, buttonWidth, buttonHeight);
+   cancel.titleLabel.font = [UIFont systemFontOfSize:buttonFontSize];
+   [cancel setTitle:@"Cancel" forState:UIControlStateNormal];
+   [cancel setBackgroundColor:[UIColor clearColor]];
+   [cancel setTitleColor:[datePickerView tintColor] forState:UIControlStateNormal];
 
-  self.cancelButton = cancel;
+   self.cancelButton = cancel;
 
 
-  //SETUP BUTTON LISTENER TO DO CANCELACTION FOR TOUCH INSIDE
-  [cancel addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
-  //ADD BUTTON TO VIEW
-  [datePickerView addSubview:cancel];
+   //SETUP BUTTON LISTENER TO DO CANCELACTION FOR TOUCH INSIDE
+   [cancel addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+   //ADD BUTTON TO VIEW
+   [datePickerView addSubview:cancel];
 
-  //DONE BUTTON SETUP
-  UIButton *done = [UIButton buttonWithType:UIButtonTypeCustom];
-  done = [[UIButton alloc] init];
-  done.frame = CGRectMake(pickerViewWidth - buttonWidth, 0, buttonWidth, buttonHeight);
-  done.titleLabel.font = [UIFont boldSystemFontOfSize:buttonFontSize];
-  [done setTitle:@"Done" forState:UIControlStateNormal];
-  [done setBackgroundColor:[UIColor clearColor]];
-  [done setTitleColor:[datePickerView tintColor] forState:UIControlStateNormal];
+   //DONE BUTTON SETUP
+   UIButton *done = [UIButton buttonWithType:UIButtonTypeCustom];
+   done = [[UIButton alloc] init];
+   done.frame = CGRectMake(pickerViewWidth - buttonWidth, 0, buttonWidth, buttonHeight);
+   done.titleLabel.font = [UIFont boldSystemFontOfSize:buttonFontSize];
+   [done setTitle:@"Done" forState:UIControlStateNormal];
+   [done setBackgroundColor:[UIColor clearColor]];
+   [done setTitleColor:[datePickerView tintColor] forState:UIControlStateNormal];
 
-  self.doneButton = done;
+   self.doneButton = done;
 
-  //SETUP BUTTON LISTENER TO DO DONEACTION FOR TOUCH INSIDE
-  [done addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
-  //ADD BUTTON TO VIEW
-  [datePickerView addSubview:done];
-*/
+   //SETUP BUTTON LISTENER TO DO DONEACTION FOR TOUCH INSIDE
+   [done addTarget:self action:@selector(doneAction:) forControlEvents:UIControlEventTouchUpInside];
+   //ADD BUTTON TO VIEW
+   [datePickerView addSubview:done];
+   */
   [datePickerView addSubview:self.datePicker];
 
-/*  UIViewController *datePickerViewController = [[UIViewController alloc]init];
-  datePickerViewController.view = datePickerView;
-  [datePickerViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-  datePickerViewController.view.backgroundColor = [UIColor whiteColor];
-*/
+  /*  UIViewController *datePickerViewController = [[UIViewController alloc]init];
+   datePickerViewController.view = datePickerView;
+   [datePickerViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+   datePickerViewController.view.backgroundColor = [UIColor whiteColor];
+   */
   CGRect screenRect = [[UIScreen mainScreen] bounds];
   CGFloat screenWidth = screenRect.size.width;
   CGFloat screenHeight = screenRect.size.height;
@@ -276,11 +277,11 @@
   [self updateDoneButton:options];
 
   /*//Size is width: pickerViewWidth, height: pickerViewHeight + buttonHeight
-  // Resizing for iOS 8
-  datePickerViewController.preferredContentSize = CGSizeMake(pickerViewWidth, pickerViewHeight + buttonHeight);
-  // Resizing for <= iOS 7
-  datePickerViewController.view.superview.frame = CGRectMake((screenWidth - pickerViewWidth)/2, (screenHeight - pickerViewHeight)/2, pickerViewWidth, pickerViewHeight + buttonHeight);
-*/
+   // Resizing for iOS 8
+   datePickerViewController.preferredContentSize = CGSizeMake(pickerViewWidth, pickerViewHeight + buttonHeight);
+   // Resizing for <= iOS 7
+   datePickerViewController.view.superview.frame = CGRectMake((screenWidth - pickerViewWidth)/2, (screenHeight - pickerViewHeight)/2, pickerViewWidth, pickerViewHeight + buttonHeight);
+   */
   // Create a generic content view controller
   UIViewController* popoverContent = [[UIViewController alloc] initWithNibName:nil bundle:nil];
   UIView *view = datePickerView;
@@ -299,9 +300,9 @@
   //present the popover view non-modal with a
   //refrence to the button pressed within the current view
   [popoverController presentPopoverFromRect:sourceRect
-                                          inView:self.webView.superview
-                        permittedArrowDirections: 0
-                                        animated:YES];
+                                     inView:self.webView.superview
+                   permittedArrowDirections: 0
+                                   animated:YES];
 
   return popoverController;
   //[[self viewController] presentViewController:datePickerViewController animated:NO completion:nil];
@@ -409,7 +410,7 @@
 /*! Converts a hex string into UIColor
  It based on http://stackoverflow.com/questions/1560081/how-can-i-create-a-uicolor-from-a-hex-string
 
-  @param hexString The hex string which has to be converted
+ @param hexString The hex string which has to be converted
  */
 - (UIColor *)colorFromHexString:(NSString *)hexString {
   unsigned rgbValue = 0;
