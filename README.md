@@ -124,7 +124,8 @@ Values: `true` | `false`
 
 Default: `false`
 
-### androidTheme - Android
+### androidTheme - Android (DEPRECATED SINCE API 23)
+
 Choose the theme of the picker
 
 Type: Int
