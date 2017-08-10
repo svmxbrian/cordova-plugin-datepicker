@@ -7,7 +7,7 @@
 
     <name>DatePicker</name>
 
-    <description>Cordova/PhoneGap DatePicker Plugin for iOS, Android and Windows Phone</description>
+    <description>Cordova/PhoneGap DatePicker Plugin for iOS and Android Phone</description>
 
     <license>MIT</license>
 
@@ -45,16 +45,6 @@
         <header-file src="src/ios/DatePicker.h" />
         <source-file src="src/ios/DatePicker.m" />
         <resource-file src="src/ios/DatePicker.xib" />
-    </platform>
-
-    <!-- windows -->
-    <platform name="windows">
-        <js-module src="www/windows/DatePicker.js" name="DatePicker">
-            <clobbers target="datePicker" />
-        </js-module>
-        <js-module src="src/windows/DatePickerProxy.js" name="DatePickerProxy">
-            <merges target="" />
-        </js-module>
     </platform>
 
 </plugin>

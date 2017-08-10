@@ -6,22 +6,20 @@
     "id": "cordova-plugin-datepicker",
     "platforms": [
       "ios",
-      "android",
-      "windows"
+      "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/VitaliiBlagodir/cordova-plugin-datepicker.git"
+    "url": "https://github.com/svmxbrian/cordova-plugin-datepicker.git"
   },
   "keywords": [
     "cordova",
     "datepicker",
     "ecosystem:cordova",
     "cordova-ios",
-    "cordova-android",
-    "cordova-windows"
+    "cordova-android"
   ],
-  "author": "Vitalii Blagodir <vitalii.blagodir@gmail.com>",
+  "author": "Brian Lee <brian.lee@ge.com>",
   "license": "Apache 2.0"
 }
