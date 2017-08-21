@@ -72,13 +72,14 @@ public class DatePickerPlugin extends CordovaPlugin {
 
     // Retrieve Android theme
     JSONObject options = data.optJSONObject(0);
-    
+
     // Change theme here to match application, otherwise if not define, use light default
+    int theme;
     try {
-        int theme = R.style.datepicker;
+        theme = R.style.datepicker;
     }
     catch (Exception e) {
-        int theme = R.style.Theme_AppCompat_Light_Dialog;
+        theme = R.style.Theme_AppCompat_Light_Dialog;
     }
 
 		if (ACTION_TIME.equalsIgnoreCase(jsonDate.action)) {
